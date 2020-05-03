@@ -1,0 +1,1 @@
+export const DATABASE_URI = "http://localhost:5000/graphql"
