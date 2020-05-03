@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
-import { query as reviewsQuery } from "./../../../apollo-queries/reviewsQuery";
+import { query as reviewsQuery } from "./../../../../../apollo-queries/reviewsQuery";
 
 export const mutation = gql`
   mutation($reviewId: ID!) {

@@ -11,6 +11,7 @@ type User {
 export const query = `
   login(email: String!, password: String!): User
   verifyToken(token: String!): User
+  userReviews(userId: ID!): [MovieReview]
 `;
 export const mutation = `
   createUser(

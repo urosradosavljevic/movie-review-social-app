@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
-import styled from "styled-components";
 
-import { MoviewReviewComments } from "../MovieReviewComments/MoviewReviewComments";
+import { MovieReviewCardWrapper } from "../MovieReviewCardWrapper";
+import { ReviewCardHeader } from "./components/ReviewCardHeader";
+import { ReviewCardFooter } from "./components/ReviewCardFooter";
+import { ReviewCardBody } from "./components/ReviewCardBody";
+import { MoviewReviewComments } from "./components/MovieReviewComments/MoviewReviewComments";
 
 // apollo
 import useLikeReviewMutation from "./useLikeReviewMutation";
@@ -9,52 +12,6 @@ import useReviewQuery from "./useReviewQuery";
 import useDeleteReviewMutation from "./useDeleteReviewMutation";
 
 // styled components
-export const MovieReviewCardWrapper = styled.section`
-  margin: 1rem;
-  background: #fff;
-  display: flex;
-  flex-direction: column;
-
-  img {
-    width: 120px;
-    position: relative;
-    top: -0.2rem;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-  }
-`;
-export const ReviewCardHeader = styled.header`
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  .review-delete {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    cursor: pointer;
-  }
-`;
-
-export const ReviewCardFooter = styled.footer`
-  border-top: 1px solid #f0f0f0;
-  margin: 0.5rem 1rem;
-  padding: 1rem;
-  box-sizing: border-box;
-
-  .likes {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-`;
-
-export const ReviewCardBody = styled.section`
-  display: flex;
-  flex-direction: column;
-  margin: 0 1rem 0.5rem 1rem;
-  h3 {
-    margin-bottom: 0.3rem;
-  }
-`;
 
 export const MovieReviewCard = ({ id, user }) => {
   const likeReviewMu = useLikeReviewMutation();

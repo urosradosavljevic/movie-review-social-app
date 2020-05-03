@@ -70,6 +70,22 @@ export default {
         throw err;
       }
     },
+    userReviews: async (parent, args) => {
+      try {
+        const { userId } = args;
+        console.log("userId", typeof userId);
+        console.log("userId", userId);
+        const reviews =
+          userId === ""
+            ? await MovieReview.find({})
+            : await MovieReview.find({ userId });
+
+        console.log("reviews", reviews);
+        return reviews;
+      } catch (err) {
+        throw err;
+      }
+    },
     reviewComments: async (parent, args) => {
       try {
         const { reviewId } = args;
@@ -180,26 +196,6 @@ export default {
           }
         }
         await review.save();
-        // const review = await MovieReview.findById(reviewId);
-        // if (!review) throw new Error("Movie review doesn't exists");
-        // if (review.likes) {
-        //   const index = review.likes.indexOf(userId);
-        //   if (index >= 0) {
-        //     await MovieReview.updateOne(
-        //       { _id: reviewId },
-        //       {
-        //         $pull: { likes: userId },
-        //       }
-        //     );
-        //   } else {
-        //     await MovieReview.updateOne(
-        //       { _id: reviewId },
-        //       {
-        //         $push: { likes: userId },
-        //       }
-        //     );
-        //   }
-        // }
         return review;
       } catch (err) {
         throw err;

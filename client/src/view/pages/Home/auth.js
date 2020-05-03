@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Header } from "../../shared-components/Header";
 import { AddMovieReview } from "./../../shared-components/AddMovieReview/AddMovieReview";
 import { MainContentWrapper } from "./../../shared-components/MainContentWrapper";
-import { Explore } from "./../../shared-components/Explore/Explore";
+import { MovieReviews } from "../../shared-components/MovieReviews/MovieReviews";
 
 import { HomeWrapper } from "./components/HomeWrapper";
 
@@ -20,7 +20,7 @@ export const AuthHome = () => {
             addReviewExpand={addReviewExpand}
             setAddReviewExpand={setAddReviewExpand}
           />
-          <Explore />
+          <MovieReviews userId={""} />
         </section>
         <aside>chat</aside>
       </MainContentWrapper>
