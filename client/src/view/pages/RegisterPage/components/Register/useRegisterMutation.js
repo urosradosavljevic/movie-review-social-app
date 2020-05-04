@@ -18,6 +18,7 @@ export const mutation = gql`
       email
       name
       token
+      following
     }
   }
 `;

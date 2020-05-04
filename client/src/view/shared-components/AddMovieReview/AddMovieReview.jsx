@@ -1,26 +1,18 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Form } from "./../Form";
 import { FormInput } from "./../FormInput";
 import { UploadReviewImage } from "./../UploadReviewImage/UploadReviewImage";
 
-import { useMappedState } from "redux-react-hook";
-
 // apollo
 import useCreateReviewMutation from "./useCreateReviewMutation";
 import { query as reviewsQuery } from "./../../../apollo-queries/reviewsQuery";
+import useAuthUser from "../../../redux/hooks/useAuthUser";
 
 export const AddMovieReview = ({ addReviewExpand, setAddReviewExpand }) => {
   const [createReview, { loading, error, data }] = useCreateReviewMutation();
 
-  const mapState = useCallback(
-    (state) => ({
-      authUser: state.sessionState.authUser,
-    }),
-    []
-  );
-
-  const { authUser } = useMappedState(mapState);
+  const { authUser } = useAuthUser();
 
   const [title, setTitle] = useState("");
   const [review, setReview] = useState("");

@@ -1,29 +1,17 @@
-import React, { useCallback } from "react";
-import { useMappedState } from "redux-react-hook";
+import React from "react";
 
 // apollo
 import useUserReviewsQuery from "./useReviewsIDsQuery";
 
 //components
 import { MovieReviewCard } from "./components/MovieReviewCard/MovieReviewCard";
-import { useEffect } from "react";
+import useAuthUser from "../../../redux/hooks/useAuthUser";
 
 export const MovieReviews = ({ userId }) => {
   console.log("userId", userId);
   const { loading, error, data } = useUserReviewsQuery(userId);
 
-  const mapState = useCallback(
-    (state) => ({
-      authUser: state.sessionState.authUser,
-    }),
-    []
-  );
-
-  useEffect(() => {
-    console.log("loading, error, data", loading, error, data);
-  }, [data]);
-
-  const { authUser } = useMappedState(mapState);
+  const { authUser } = useAuthUser();
 
   if (loading) return <p>Loading..</p>;
 

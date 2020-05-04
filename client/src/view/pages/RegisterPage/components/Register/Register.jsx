@@ -30,13 +30,14 @@ export const Register = () => {
 
   useEffect(() => {
     const func = async () => {
-      const { _id, token } = await data.createUser;
+      const { _id, token, following } = await data.createUser;
 
       dispatch({
         type: actions.SET_AUTH_USER,
         authUser: {
           _id,
           email,
+          following,
         },
       });
 

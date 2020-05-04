@@ -1,6 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 
 const reviewSchema = new Schema({
+  createdAt: String,
   title: String,
   review: String,
   director: String,

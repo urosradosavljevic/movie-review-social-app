@@ -1,4 +1,7 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import moment from "moment";
+import * as routes from "../../../../../constants/routes";
 
 import { MovieReviewCardWrapper } from "../MovieReviewCardWrapper";
 import { ReviewCardHeader } from "./components/ReviewCardHeader";
@@ -30,6 +33,12 @@ export const MovieReviewCard = ({ id, user }) => {
     deleteReviewMutation(id);
   };
 
+  const renderRate = (times) => {
+    let rate = "";
+    while (times--) rate = `${rate} ⭐`;
+    return rate;
+  };
+
   useEffect(() => {
     loadReview({ variables: { reviewId: id } });
   }, []);
@@ -49,11 +58,16 @@ export const MovieReviewCard = ({ id, user }) => {
               x
             </span>
           )}
-          <img src="https://m.media-amazon.com/images/M/MV5BNzQ3ODUzNDY2M15BMl5BanBnXkFtZTgwNzg0ODY2MTE@._V1_UY1200_CR90,0,630,1200_AL_.jpg" />
+          <img src={review.img} />
           <ReviewCardBody>
             <h3>{review.title}</h3>
+            <span>{renderRate(parseInt(review.rate))}</span>
             <span>
-              review author: {review.user.name}, rating: {review.rate}
+              Posted on {moment(review.createdAt).format("MMMM Do YYYY, H:mm")}
+              {" by "}
+              <Link to={routes.USER + review.user.email}>
+                {review.user.name}
+              </Link>
             </span>
             <p>{review.review.slice(0, 250)}...</p>
           </ReviewCardBody>

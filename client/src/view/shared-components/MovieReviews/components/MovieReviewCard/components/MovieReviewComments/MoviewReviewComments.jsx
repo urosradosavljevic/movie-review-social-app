@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import * as routes from "../../../../../../../constants/routes";
 import moment from "moment";
 
 import useCommentReviewMutation from "./useCommentReviewMutation";
@@ -49,7 +51,11 @@ export const MoviewReviewComments = ({ reviewId, user }) => {
             }
           >
             <div>
-              <span className="comment-user">{comment.user.name}</span>
+              <span className="comment-user">
+                <Link to={routes.USER + comment.user.email}>
+                  {comment.user.name}
+                </Link>
+              </span>
               <span>{comment.text}</span>
             </div>
             <span className="comment-time">

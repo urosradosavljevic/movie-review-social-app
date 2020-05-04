@@ -1,6 +1,7 @@
 export const type = `
 type MovieReview {
   _id: ID
+  createdAt: String
   title: String
   review: String
   director: String

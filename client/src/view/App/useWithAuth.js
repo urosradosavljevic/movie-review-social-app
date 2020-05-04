@@ -20,7 +20,7 @@ export const useWithAuth = () => {
 
   useEffect(() => {
     if (data) {
-      const { _id, name, email } = data.verifyToken;
+      const { _id, name, email, following } = data.verifyToken;
       if (email) {
         dispatch({
           type: actions.SET_AUTH_USER,
@@ -28,6 +28,7 @@ export const useWithAuth = () => {
             _id,
             name,
             email,
+            following,
           },
         });
       } else {

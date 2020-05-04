@@ -32,13 +32,14 @@ export const Login = () => {
 
   useEffect(() => {
     const opa = async () => {
-      const { _id, token } = await data.login;
+      const { _id, token, following } = await data.login;
 
       dispatch({
         type: actions.SET_AUTH_USER,
         authUser: {
           _id,
           email,
+          following,
         },
       });
 

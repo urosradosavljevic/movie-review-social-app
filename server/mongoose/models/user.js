@@ -5,6 +5,7 @@ const userSchema = new Schema({
   password: String,
   name: String,
   token: String,
+  following: Array,
 });
 
 export default mongoose.model("User", userSchema);

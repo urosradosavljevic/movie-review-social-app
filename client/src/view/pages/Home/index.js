@@ -1,17 +1,10 @@
-import React, { useCallback } from "react";
-import { useMappedState } from "redux-react-hook";
+import React from "react";
 import { AuthHome } from "./auth";
 import { LoginPage } from "./../LoginPage/LoginPage";
+import useAuthUser from "../../../redux/hooks/useAuthUser";
 
 export const Home = () => {
-  const mapState = useCallback(
-    (state) => ({
-      authUser: state.sessionState.authUser,
-    }),
-    []
-  );
-
-  const { authUser } = useMappedState(mapState);
+  const { authUser } = useAuthUser();
 
   return authUser ? <AuthHome /> : <LoginPage />;
 };

@@ -1,16 +1,18 @@
+import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
-import { useLazyQuery } from "@apollo/react-hooks";
 
 export const query = gql`
-  query($userId: ID!) {
-    userReviews(userId: $userId) {
+  query {
+    users {
       _id
+      name
+      following
     }
   }
 `;
 
 export default () =>
-  useLazyQuery(query, {
+  useQuery(query, {
     onError(err) {
       console.error(err);
     },

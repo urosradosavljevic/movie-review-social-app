@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import path from "path";
+import { compareReviewByTimeCreated } from "../../helpers/compareReviewByTimeCreated";
 import { createWriteStream } from "fs";
 import moment from "moment";
 import { SERVER_URL_IMAGES } from "./../../constants/server";
@@ -11,25 +12,25 @@ import Comment from "./../../mongoose/models/comment";
 
 export default {
   User: {
-    reviews: (parent, args) => {
-      return MovieReview.findOne({ userId: parent.id });
+    reviews: (parent, _) => {
+      return MovieReview.find({ userId: parent.id });
     },
   },
   MovieReview: {
-    user: (parent, args) => {
+    user: (parent, _) => {
       return User.findById(parent.userId);
     },
-    comments: (parent, args) => {
+    comments: (parent, _) => {
       return Comment.find({ reviewId: parent._id });
     },
   },
   Comment: {
-    user: (parent, args) => {
+    user: (parent, _) => {
       return User.findById(parent.userId);
     },
   },
   Query: {
-    login: async (parent, args) => {
+    login: async (_, args) => {
       try {
         const user = await User.findOne({ email: args.email });
         if (!user) throw new Error("Email does not exist");
@@ -44,7 +45,7 @@ export default {
         throw err;
       }
     },
-    verifyToken: async (parent, args) => {
+    verifyToken: async (_, args) => {
       try {
         const decoded = jwt.verify(args.token, "mysecret");
         const user = await User.findOne({ _id: decoded.id });
@@ -53,7 +54,7 @@ export default {
         throw err;
       }
     },
-    review: async (parent, args) => {
+    review: async (_, args) => {
       try {
         const { id } = args;
         const review = await MovieReview.findById(id);
@@ -70,23 +71,40 @@ export default {
         throw err;
       }
     },
-    userReviews: async (parent, args) => {
+    user: async (_, args) => {
+      try {
+        const { email } = args;
+        const user = User.findOne({ email });
+
+        return user;
+      } catch (err) {
+        throw err;
+      }
+    },
+    users: async () => {
+      try {
+        const users = User.find({});
+        return users;
+      } catch (err) {
+        throw err;
+      }
+    },
+    userReviews: async (_, args) => {
       try {
         const { userId } = args;
-        console.log("userId", typeof userId);
-        console.log("userId", userId);
         const reviews =
           userId === ""
             ? await MovieReview.find({})
             : await MovieReview.find({ userId });
 
-        console.log("reviews", reviews);
+        reviews.sort(compareReviewByTimeCreated);
+
         return reviews;
       } catch (err) {
         throw err;
       }
     },
-    reviewComments: async (parent, args) => {
+    reviewComments: async (_, args) => {
       try {
         const { reviewId } = args;
 
@@ -97,7 +115,7 @@ export default {
         throw err;
       }
     },
-    comment: async (parent, args) => {
+    comment: async (_, args) => {
       try {
         const { id } = args;
         const comment = await Comment.findOne({ id });
@@ -106,7 +124,7 @@ export default {
         throw err;
       }
     },
-    comments: async (parent, args) => {
+    comments: async (_, args) => {
       try {
         const { _id } = args;
         const reviews = await MovieReview.find({ _id });
@@ -118,7 +136,7 @@ export default {
     },
   },
   Mutation: {
-    createUser: async (parent, args) => {
+    createUser: async (_, args) => {
       try {
         const { email, password, confirm, name } = args;
         const existingUser = await User.findOne({ email });
@@ -146,13 +164,14 @@ export default {
         throw err;
       }
     },
-    createReview: async (parent, args) => {
+    createReview: async (_, args) => {
       try {
         const { title, review, director, rate, img, userId } = args;
         const existingReview = await MovieReview.findOne({ title });
         if (existingReview) throw new Error("Movie review already exists");
         const movieReview = new MovieReview(
           {
+            createdAt: moment().format(),
             title,
             review,
             director,
@@ -170,7 +189,7 @@ export default {
         throw err;
       }
     },
-    deleteReview: async (parent, args) => {
+    deleteReview: async (_, args) => {
       try {
         const { reviewId } = args;
 
@@ -183,7 +202,7 @@ export default {
         throw err;
       }
     },
-    likeReview: async (parent, args) => {
+    likeReview: async (_, args) => {
       try {
         const { userId, reviewId } = args;
         const review = await MovieReview.findOne({ _id: reviewId });
@@ -201,7 +220,26 @@ export default {
         throw err;
       }
     },
-    commentReview: async (parent, args) => {
+    followUser: async (_, args) => {
+      try {
+        const { userId, idToFollow } = args;
+        const user = await User.findOne({ _id: userId });
+
+        if (user.following) {
+          const index = user.following.indexOf(idToFollow);
+          if (index >= 0) {
+            user.following.splice(index, 1);
+          } else {
+            user.following.push(idToFollow);
+          }
+        }
+        await user.save();
+        return user;
+      } catch (err) {
+        throw err;
+      }
+    },
+    commentReview: async (_, args) => {
       try {
         const { userId, reviewId, text } = args;
 
@@ -223,7 +261,7 @@ export default {
         throw err;
       }
     },
-    deleteCommentReview: async (parent, args) => {
+    deleteCommentReview: async (_, args) => {
       try {
         const { commentId } = args;
 
@@ -237,7 +275,7 @@ export default {
       }
     },
 
-    uploadReviewImage: async (parent, { file }) => {
+    uploadReviewImage: async (_, { file }) => {
       try {
         const { createReadStream, filename } = await file;
 

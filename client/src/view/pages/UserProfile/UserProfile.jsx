@@ -1,14 +1,11 @@
-import React, { useCallback, useEffect } from "react";
-import { useMappedState } from "redux-react-hook";
+import React from "react";
 import styled from "styled-components";
 
-//apollo
-import useUserReviewsQuery from "./useUserReviewsIDsQuery";
-
 //components
-import { Header } from "../../shared-components/Header";
+import { Header } from "../../shared-components/Header/Header";
 import { MainContentWrapper } from "./../../shared-components/MainContentWrapper";
 import { MovieReviews } from "../../shared-components/MovieReviews/MovieReviews";
+import useUserQuery from "./useUserQuery";
 
 export const UserImage = styled.div`
   width: 200px;
@@ -24,20 +21,13 @@ export const UserName = styled.div`
   margin: 2rem;
 `;
 
-export const UserProfile = () => {
-  // const [userReviewsQuery, { loading, error, data }] = useUserReviewsQuery();
-  const mapState = useCallback(
-    (state) => ({
-      authUser: state.sessionState.authUser,
-    }),
-    []
-  );
-
-  const { authUser } = useMappedState(mapState);
-
-  // useEffect(() => {
-  //   userReviewsQuery({ variables: { userId: authUser._id } });
-  // }, [authUser]);
+export const UserProfile = ({
+  match: {
+    params: { slug },
+  },
+}) => {
+  const { loading, error, data } = useUserQuery(slug);
+  if (loading) return <h2>Loading..</h2>;
 
   return (
     <>
@@ -47,10 +37,10 @@ export const UserProfile = () => {
           User info
           <UserImage>User image</UserImage>
           <UserName>
-            <h2>{authUser.name}</h2>
+            <h2>{data.user.name}</h2>
           </UserName>
         </div>
-        <MovieReviews userId={authUser._id} />
+        <MovieReviews userId={data.user._id} />
         <h3>Chat</h3>
       </MainContentWrapper>
     </>

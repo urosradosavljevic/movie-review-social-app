@@ -10,6 +10,7 @@ export const query = gql`
       user {
         _id
         name
+        email
       }
     }
   }

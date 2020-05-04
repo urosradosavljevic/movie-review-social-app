@@ -31,15 +31,11 @@ export const App = () => {
       <Normalize />
       <AppContainer>
         <Switch>
-          <Route exact path={routes.HOME} component={() => <Home />} />
-          <Route exact path={routes.LOGIN} component={() => <LoginPage />} />
-          <Route
-            exact
-            path={routes.SIGN_UP}
-            component={() => <RegisterPage />}
-          />
-          <Route exact path={routes.USERS} component={() => <UserProfile />} />
-          <Route component={() => <NotFound />} />
+          <Route exact path={routes.HOME} component={Home} />
+          <Route exact path={routes.LOGIN} component={LoginPage} />
+          <Route exact path={routes.SIGN_UP} component={RegisterPage} />
+          <Route exact path={routes.USERS} component={UserProfile} />
+          <Route component={NotFound} />
         </Switch>
       </AppContainer>
     </Router>
