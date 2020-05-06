@@ -16,6 +16,8 @@ export const query = `
   review(id: ID!): MovieReview
   reviews: [MovieReview]
   reviewComments(reviewId: ID!): [Comment]
+  followingReviews(following:[ID]!): [MovieReview]
+  exploreReviews(following:[ID]!): [MovieReview]
 `;
 export const mutation = `
   createReview(

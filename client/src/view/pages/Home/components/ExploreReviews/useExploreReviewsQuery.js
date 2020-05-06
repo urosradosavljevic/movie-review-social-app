@@ -2,20 +2,16 @@ import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 export const query = gql`
-  query($email: String!) {
-    user(email: $email) {
+  query ExploreReviews($following: [ID]!) {
+    exploreReviews(following: $following) {
       _id
-      reviews {
-        _id
-      }
-      name
     }
   }
 `;
 
-export default (email) =>
+export default (following) =>
   useQuery(query, {
-    variables: { email },
+    variables: { following },
     onError(err) {
       console.error(err);
     },

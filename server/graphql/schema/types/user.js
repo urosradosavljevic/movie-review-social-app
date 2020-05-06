@@ -12,10 +12,11 @@ type User {
 export const query = `
   user(email: String): User
   users: [User]
+  usersById(usersIds:[ID]!): [User]
   login(email: String!, password: String!): User
   verifyToken(token: String!): User
   userReviews(userId: ID!): [MovieReview]
-  `;
+`;
 export const mutation = `
   createUser(
     email: String!

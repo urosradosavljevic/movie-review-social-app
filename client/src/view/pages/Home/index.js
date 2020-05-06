@@ -6,5 +6,5 @@ import useAuthUser from "../../../redux/hooks/useAuthUser";
 export const Home = () => {
   const { authUser } = useAuthUser();
 
-  return authUser ? <AuthHome /> : <LoginPage />;
+  return authUser ? <AuthHome authUser={authUser} /> : <LoginPage />;
 };

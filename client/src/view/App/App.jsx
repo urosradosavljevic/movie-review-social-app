@@ -1,7 +1,6 @@
 import React, { useCallback } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useMappedState } from "redux-react-hook";
-import Normalize from "react-normalize";
 
 import { Home } from "../pages/Home/index";
 import { RegisterPage } from "../pages/RegisterPage/RegisterPage";
@@ -28,7 +27,6 @@ export const App = () => {
 
   return (
     <Router basename={process.env.PUBLIC_URL}>
-      <Normalize />
       <AppContainer>
         <Switch>
           <Route exact path={routes.HOME} component={Home} />

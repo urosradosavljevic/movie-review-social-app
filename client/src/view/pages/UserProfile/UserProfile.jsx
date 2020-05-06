@@ -40,7 +40,8 @@ export const UserProfile = ({
             <h2>{data.user.name}</h2>
           </UserName>
         </div>
-        <MovieReviews userId={data.user._id} />
+        {console.log(data.user.reviews)}
+        <MovieReviews reviewsIds={data.user.reviews} />
         <h3>Chat</h3>
       </MainContentWrapper>
     </>

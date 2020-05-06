@@ -3,13 +3,14 @@ import React, { useState, useEffect } from "react";
 import { Form } from "./../Form";
 import { FormInput } from "./../FormInput";
 import { UploadReviewImage } from "./../UploadReviewImage/UploadReviewImage";
+import { AddMovieReviewWrapper } from "./components/AddMovieReviewWrapper";
 
 // apollo
 import useCreateReviewMutation from "./useCreateReviewMutation";
 import { query as reviewsQuery } from "./../../../apollo-queries/reviewsQuery";
 import useAuthUser from "../../../redux/hooks/useAuthUser";
 
-export const AddMovieReview = ({ addReviewExpand, setAddReviewExpand }) => {
+export const AddMovieReview = () => {
   const [createReview, { loading, error, data }] = useCreateReviewMutation();
 
   const { authUser } = useAuthUser();
@@ -21,6 +22,7 @@ export const AddMovieReview = ({ addReviewExpand, setAddReviewExpand }) => {
   const [reviewImagePath, setReviewImagePath] = useState("");
 
   const [addReviewError, setAddReviewError] = useState(null);
+  const [addReviewExpand, setAddReviewExpand] = useState(false);
 
   useEffect(() => {
     error !== addReviewError && setAddReviewError(error);
@@ -65,7 +67,7 @@ export const AddMovieReview = ({ addReviewExpand, setAddReviewExpand }) => {
   };
 
   return (
-    <>
+    <AddMovieReviewWrapper onClick={() => setAddReviewExpand(true)}>
       {addReviewExpand ? (
         <>
           <Form onSubmit={submit}>
@@ -109,8 +111,8 @@ export const AddMovieReview = ({ addReviewExpand, setAddReviewExpand }) => {
           <UploadReviewImage setReviewImagePath={setReviewImagePath} />
         </>
       ) : (
-        <p onClick={() => setAddReviewExpand(true)}>Add review</p>
+        <p>Add review</p>
       )}
-    </>
+    </AddMovieReviewWrapper>
   );
 };

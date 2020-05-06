@@ -89,6 +89,17 @@ export default {
         throw err;
       }
     },
+    usersById: async (_, args) => {
+      try {
+        const { usersIds } = args;
+
+        const users = await User.find({ _id: { $in: usersIds } });
+
+        return users;
+      } catch (err) {
+        throw err;
+      }
+    },
     userReviews: async (_, args) => {
       try {
         const { userId } = args;
@@ -100,6 +111,32 @@ export default {
         reviews.sort(compareReviewByTimeCreated);
 
         return reviews;
+      } catch (err) {
+        throw err;
+      }
+    },
+    exploreReviews: async (_, args) => {
+      try {
+        const { following } = args;
+
+        const exploreReviews = await MovieReview.find({
+          userId: { $nin: following },
+        });
+
+        return exploreReviews;
+      } catch (err) {
+        throw err;
+      }
+    },
+    followingReviews: async (_, args) => {
+      try {
+        const { following } = args;
+
+        const followingReviews = await MovieReview.find({
+          userId: { $in: following },
+        });
+
+        return followingReviews;
       } catch (err) {
         throw err;
       }
