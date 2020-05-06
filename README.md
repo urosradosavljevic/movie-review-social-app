@@ -1,7 +1,7 @@
 # Movie Review Social App
  *Project is still in progress, feel free to leave any feedback*
 
-* **Finished so far:**: 
+* **Finished so far:**
   * Authentification with JWT
   * Posting movie reviews with photo upload on server
   * Likes, comments and follows with live updates
@@ -18,4 +18,4 @@
   * JWT
   
 
-![Preview](https://raw.githubusercontent.com/urosradosavljevic/movie-review-social-app/master/preview.JPG)
+![Current Preview](https://raw.githubusercontent.com/urosradosavljevic/movie-review-social-app/master/preview.JPG)
