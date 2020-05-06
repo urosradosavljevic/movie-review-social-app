@@ -4,11 +4,13 @@ import { Form } from "./../Form";
 import { FormInput } from "./../FormInput";
 import { UploadReviewImage } from "./../UploadReviewImage/UploadReviewImage";
 import { AddMovieReviewWrapper } from "./components/AddMovieReviewWrapper";
+import { Button } from "./../Buttons";
 
 // apollo
 import useCreateReviewMutation from "./useCreateReviewMutation";
 import { query as reviewsQuery } from "./../../../apollo-queries/reviewsQuery";
 import useAuthUser from "../../../redux/hooks/useAuthUser";
+import { AddReviewHeader } from "./components/AddReviewHeader";
 
 export const AddMovieReview = () => {
   const [createReview, { loading, error, data }] = useCreateReviewMutation();
@@ -19,7 +21,7 @@ export const AddMovieReview = () => {
   const [review, setReview] = useState("");
   const [director, setDirector] = useState("");
   const [rate, setRate] = useState("");
-  const [reviewImagePath, setReviewImagePath] = useState("");
+  const [reviewImagePath, setReviewImagePath] = useState(null);
 
   const [addReviewError, setAddReviewError] = useState(null);
   const [addReviewExpand, setAddReviewExpand] = useState(false);
@@ -67,9 +69,10 @@ export const AddMovieReview = () => {
   };
 
   return (
-    <AddMovieReviewWrapper onClick={() => setAddReviewExpand(true)}>
+    <AddMovieReviewWrapper>
       {addReviewExpand ? (
         <>
+          <AddReviewHeader>New review</AddReviewHeader>
           <Form onSubmit={submit}>
             <span
               id="cancel-expand-review"
@@ -102,16 +105,21 @@ export const AddMovieReview = () => {
                 {addReviewError ? addReviewError.message : ""}
               </span>
             </div>
+            <UploadReviewImage
+              reviewImagePath={reviewImagePath}
+              setReviewImagePath={setReviewImagePath}
+            />
             <FormInput
               type="submit"
-              value={loading ? "Posting" : "Post"}
+              value={loading ? "Adding.." : "Add review"}
               submit
             />
           </Form>
-          <UploadReviewImage setReviewImagePath={setReviewImagePath} />
         </>
       ) : (
-        <p>Add review</p>
+        <Button addReview onClick={() => setAddReviewExpand(true)}>
+          Add a review..
+        </Button>
       )}
     </AddMovieReviewWrapper>
   );

@@ -1,8 +1,10 @@
 import React, { useCallback, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import useUploadImageMutation from "./useUploadImageMutation";
+import { UploadReviewImageWrapper } from "./components/UploadReviewImageWrapper";
+import { PreviewImage } from "./components/PreviewImage";
 
-export const UploadReviewImage = ({ setReviewImagePath }) => {
+export const UploadReviewImage = ({ setReviewImagePath, reviewImagePath }) => {
   const [uploadReviewImage, { data }] = useUploadImageMutation();
   const onDrop = useCallback(
     ([file]) => {
@@ -17,13 +19,18 @@ export const UploadReviewImage = ({ setReviewImagePath }) => {
   }, [data]);
 
   return (
-    <div {...getRootProps()}>
-      <input {...getInputProps()} />
-      {isDragActive ? (
-        <p>Drop review image here...</p>
-      ) : (
-        <p>Drag and drop some review image here, or click to select image</p>
+    <UploadReviewImageWrapper>
+      {reviewImagePath && (
+        <PreviewImage src={reviewImagePath} alt="review image" />
       )}
-    </div>
+      <div {...getRootProps()}>
+        <input {...getInputProps()} />
+        {isDragActive ? (
+          <p>Drop review image here...</p>
+        ) : (
+          <p>Drag and drop some image here..</p>
+        )}
+      </div>
+    </UploadReviewImageWrapper>
   );
 };

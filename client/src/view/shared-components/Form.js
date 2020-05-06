@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
 export const Form = styled.form`
-  position: relative;
   display: flex;
   flex-direction: column;
+  margin-top: 15px;
 
   #cancel-expand-review {
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 25px;
+    top: 15px;
     cursor: pointer;
   }
 `;
