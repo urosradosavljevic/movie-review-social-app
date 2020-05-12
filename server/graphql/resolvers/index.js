@@ -201,6 +201,18 @@ export default {
         throw err;
       }
     },
+    editUserInfo: async (_, args) => {
+      try {
+        const { userId, name } = args;
+        const user = await User.findById(userId);
+        user.name = name;
+        console.log("user", user);
+        user.save();
+        return user;
+      } catch (err) {
+        throw err;
+      }
+    },
     createReview: async (_, args) => {
       try {
         const { title, review, director, rate, img, userId } = args;

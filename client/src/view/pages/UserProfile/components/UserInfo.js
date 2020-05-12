@@ -22,7 +22,7 @@ export const UserImage = styled.div`
   color: #333;
 `;
 
-export const UserName = styled.div`
+export const UserNameWrapper = styled.div`
   margin-top: 1rem;
   width: 100%;
   display: flex;

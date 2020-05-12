@@ -25,4 +25,5 @@ export const mutation = `
     confirm: String!
     ): User
     followUser(userId: ID!, idToFollow: ID!): User
+    editUserInfo(userId: ID!,name: String!): User
 `;
