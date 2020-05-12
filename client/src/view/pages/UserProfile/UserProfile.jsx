@@ -7,13 +7,14 @@ import { MovieReviews } from "../../shared-components/MovieReviews/MovieReviews"
 import useUserQuery from "./useUserQuery";
 import { AddMovieReview } from "../../shared-components/AddMovieReview/AddMovieReview";
 import { UserInfo } from "./components/UserInfo/UserInfo";
+import { Users } from "../../shared-components/Users/Users";
 
 export const UserProfile = ({
   match: {
     params: { slug },
   },
 }) => {
-  const { loading, error, data } = useUserQuery(slug);
+  const { loading, data } = useUserQuery(slug);
 
   if (loading) return <h2>Loading..</h2>;
 
@@ -26,7 +27,7 @@ export const UserProfile = ({
           <AddMovieReview />
           <MovieReviews reviewsIds={data.user.reviews} />
         </div>
-        <h3>Chat</h3>
+        <Users />
       </MainContentWrapper>
     </>
   );

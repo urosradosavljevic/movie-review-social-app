@@ -1,6 +1,6 @@
 import React from "react";
-import { ListItem } from "./ListItem";
-import { List } from "./List";
+import { ListItem } from "../../../../shared-components/ListItem";
+import { List } from "../../../../shared-components/List";
 import { SideNavWrapper } from "./SideNavWrapper";
 
 export const SideNav = ({ exploreFlag, setExploreFlag }) => {

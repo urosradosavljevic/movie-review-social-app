@@ -2,19 +2,20 @@ import React from "react";
 import useUsersQuery from "./useUsersQuery";
 import { UserCard } from "./components/UserCard/UserCard";
 import useAuthUser from "../../../redux/hooks/useAuthUser";
+import { List } from "../List";
 
 export const Users = () => {
-  const { loading, error, data } = useUsersQuery();
+  const { loading, data } = useUsersQuery();
 
   const { authUser } = useAuthUser();
 
   return (
     <div>
-      <h2>Users</h2>
+      <h3 style={{ textAlign: "center" }}>Users</h3>
       {loading ? (
-        <h3>Loading...</h3>
+        <h4>Loading...</h4>
       ) : (
-        <ul>
+        <List>
           {data.users.reduce((result, user) => {
             if (user._id !== authUser._id) {
               result.push(
@@ -31,7 +32,7 @@ export const Users = () => {
             }
             return result;
           }, [])}
-        </ul>
+        </List>
       )}
     </div>
   );

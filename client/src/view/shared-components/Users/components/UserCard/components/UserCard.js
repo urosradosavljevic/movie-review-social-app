@@ -5,7 +5,7 @@ export const UserCardWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 5px;
-  margin-bottom: 10px;
+  margin: 0 5px 10px 5px;
   a {
     text-decoration: none;
   }
