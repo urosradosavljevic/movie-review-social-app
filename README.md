@@ -18,4 +18,5 @@
   * JWT
   
 
-![Current Preview](https://raw.githubusercontent.com/urosradosavljevic/movie-review-social-app/master/homepage-preview.jpg)
+![Current Homepage Preview](https://raw.githubusercontent.com/urosradosavljevic/movie-review-social-app/master/homepage-preview.jpg)
+![Current UserPage Preview](https://raw.githubusercontent.com/urosradosavljevic/movie-review-social-app/master/userpage-preview.jpg)
