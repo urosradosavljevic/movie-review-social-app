@@ -3,18 +3,21 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import * as routes from "../../../../../constants/routes";
 
-import { MovieReviewCardWrapper } from "../MovieReviewCardWrapper";
-import { ReviewCardHeader } from "./components/ReviewCardHeader";
-import { ReviewCardFooter } from "./components/ReviewCardFooter";
-import { ReviewCardBody } from "./components/ReviewCardBody";
+import {
+  MovieReviewCardWrapper,
+  ReviewCardHeader,
+  ReviewCardImg,
+  ReviewCardFooter,
+  ReviewCardBody,
+  ReviewCardTitle,
+  ReviewCardAuthor,
+  ReviewCardRating,
+} from "./components/ReviewCard";
 import { MoviewReviewComments } from "./components/MovieReviewComments/MoviewReviewComments";
 
-// apollo
 import useLikeReviewMutation from "./useLikeReviewMutation";
 import useReviewQuery from "./useReviewQuery";
 import useDeleteReviewMutation from "./useDeleteReviewMutation";
-
-// styled components
 
 export const MovieReviewCard = ({ id, user }) => {
   const likeReviewMu = useLikeReviewMutation();
@@ -58,17 +61,18 @@ export const MovieReviewCard = ({ id, user }) => {
               x
             </span>
           )}
-          <img src={review.img} />
+          <ReviewCardImg src={review.img} />
           <ReviewCardBody>
-            <h3>{review.title}</h3>
-            <span>{renderRate(parseInt(review.rate))}</span>
-            <span>
-              Posted on {moment(review.createdAt).format("MMMM Do YYYY, H:mm")}
-              {" by "}
+            <ReviewCardTitle>{review.title}</ReviewCardTitle>
+            <ReviewCardAuthor>
               <Link to={routes.USER + review.user.email}>
                 {review.user.name}
-              </Link>
-            </span>
+              </Link>{" "}
+              on {moment(review.createdAt).format("MMMM Do YYYY")}
+            </ReviewCardAuthor>
+            <ReviewCardRating>
+              {renderRate(parseInt(review.rate))}
+            </ReviewCardRating>
             <p>{review.review.slice(0, 250)}...</p>
           </ReviewCardBody>
         </ReviewCardHeader>

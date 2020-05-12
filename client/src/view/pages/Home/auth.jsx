@@ -25,7 +25,7 @@ export const AuthHome = ({ authUser: { following } }) => {
         </section>
         <Users />
       </MainContentWrapper>
-      <footer>footer</footer>
+      <footer>Uros Radosavljevic 2020</footer>
     </HomeWrapper>
   );
 };
