@@ -24,4 +24,14 @@ export const Button = styled.button`
       font-size: 15px;
       outline: none;
     `}
+  ${(props) =>
+    props.like &&
+    css`
+      background-color: transparent;
+      font-weight: 600;
+      color: #333;
+      text-align: left;
+      font-size: 14px;
+      outline: none;
+    `}
 `;

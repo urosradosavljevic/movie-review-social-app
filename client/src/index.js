@@ -12,7 +12,7 @@ import store from "./redux/store";
 
 // apollo
 import { ApolloProvider } from "react-apollo";
-import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
+import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { createUploadLink } from "apollo-upload-client";
 
 // apollo client setup

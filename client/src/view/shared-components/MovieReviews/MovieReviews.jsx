@@ -1,12 +1,8 @@
 import React from "react";
 
-// apollo
-import useUserReviewsQuery from "./useReviewsIDsQuery";
-
 //components
 import { MovieReviewCard } from "./components/MovieReviewCard/MovieReviewCard";
 import useAuthUser from "../../../redux/hooks/useAuthUser";
-import { useEffect } from "react";
 
 export const MovieReviews = ({ reviewsIds }) => {
   const { authUser } = useAuthUser();

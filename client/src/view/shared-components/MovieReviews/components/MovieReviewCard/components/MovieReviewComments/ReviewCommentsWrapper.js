@@ -8,7 +8,6 @@ export const ReviewCommentsWrapper = styled.div`
     display: flex;
     flex-direction: column;
     margin: 0 10px;
-    margin-top: 5px;
   }
 
   .comments-more {
@@ -26,6 +25,7 @@ export const ReviewCommentsWrapper = styled.div`
     width: 100%;
     flex-direction: column;
     margin: 3px;
+    margin-bottom: 0;
   }
   .comment-single.more {
     display: none;
@@ -42,7 +42,7 @@ export const ReviewCommentsWrapper = styled.div`
   .comment-input {
     width: 100%;
     box-shadow: none;
-    margin: 0 auto 10px auto;
+    margin: 8px auto 10px auto;
     font-size: 0.9rem;
     border-radius: 5px;
     border: 1px solid #ddd;

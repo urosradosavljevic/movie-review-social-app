@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import useEditUserInfoMutation from "./useEditUserInfoMutation";
 import { Form } from "../../../../shared-components/Form";
 import { FormInput } from "../../../../shared-components/FormInput";
-import { Button } from "../../../../shared-components/Buttons";
 
 export const UserName = ({ userId, name, editFlag, setEditFlag }) => {
   const [editUser] = useEditUserInfoMutation();
@@ -18,10 +17,6 @@ export const UserName = ({ userId, name, editFlag, setEditFlag }) => {
   useEffect(() => {
     editFlag && inputElement.current.focus();
   }, [editFlag]);
-
-  useEffect(() => {
-    console.log(userName);
-  }, [userName]);
 
   return (
     <div>

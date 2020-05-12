@@ -7,8 +7,10 @@ export const ListItem = styled.li`
   cursor: pointer;
 
   background-color: ${(props) => props.selected && "rgba(0, 0, 0, 0.05)"};
+  border-radius: 5px;
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
   }
 `;

@@ -3,7 +3,7 @@ import { MovieReviews } from "../../../../shared-components/MovieReviews/MovieRe
 import useExploreReviewsQuery from "./useExploreReviewsQuery";
 
 export const ExploreReviews = ({ following }) => {
-  const { loading, error, data } = useExploreReviewsQuery(following);
+  const { loading, data } = useExploreReviewsQuery(following);
 
   if (loading) return <h3>loading...</h3>;
 

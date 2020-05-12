@@ -9,15 +9,18 @@ import {
   ReviewCardImg,
   ReviewCardFooter,
   ReviewCardBody,
+  ReviewInfo,
   ReviewCardTitle,
   ReviewCardAuthor,
   ReviewCardRating,
+  ReviewCardAvatar,
 } from "./components/ReviewCard";
 import { MoviewReviewComments } from "./components/MovieReviewComments/MoviewReviewComments";
 
 import useLikeReviewMutation from "./useLikeReviewMutation";
 import useReviewQuery from "./useReviewQuery";
 import useDeleteReviewMutation from "./useDeleteReviewMutation";
+import { Button } from "../../../Buttons";
 
 export const MovieReviewCard = ({ id, user }) => {
   const likeReviewMu = useLikeReviewMutation();
@@ -53,6 +56,13 @@ export const MovieReviewCard = ({ id, user }) => {
     return (
       <MovieReviewCardWrapper>
         <ReviewCardHeader>
+          <ReviewCardAuthor>
+            <ReviewCardAvatar>{review.user.name.slice(0, 2)}</ReviewCardAvatar>
+            <Link to={routes.USER + review.user.email}>
+              {review.user.name}
+            </Link>{" "}
+            on {moment(review.createdAt).format("MMMM Do YYYY")}
+          </ReviewCardAuthor>
           {review.user._id === user._id && (
             <span
               onClick={() => deleteReview(review._id)}
@@ -61,30 +71,29 @@ export const MovieReviewCard = ({ id, user }) => {
               x
             </span>
           )}
+        </ReviewCardHeader>
+        <ReviewCardBody>
           <ReviewCardImg src={review.img} />
-          <ReviewCardBody>
+          <ReviewInfo>
             <ReviewCardTitle>{review.title}</ReviewCardTitle>
-            <ReviewCardAuthor>
-              <Link to={routes.USER + review.user.email}>
-                {review.user.name}
-              </Link>{" "}
-              on {moment(review.createdAt).format("MMMM Do YYYY")}
-            </ReviewCardAuthor>
             <ReviewCardRating>
               {renderRate(parseInt(review.rate))}
             </ReviewCardRating>
             <p>{review.review.slice(0, 250)}...</p>
-          </ReviewCardBody>
-        </ReviewCardHeader>
-        <ReviewCardFooter>
-          <div className="likes">
-            <div>
-              Likes: <span>{review.likes.length}</span>
+            <div className="likes">
+              <div>
+                <span>
+                  {review.likes.length}
+                  {review.likes.length === 1 ? " like" : " likes"}
+                </span>
+              </div>
+              <Button like onClick={likeReview}>
+                {review.likes.find((l) => l === user._id) ? "Dislike" : "Like"}
+              </Button>
             </div>
-            <button onClick={likeReview}>
-              {review.likes.find((l) => l === user._id) ? "Dislike" : "Like"}
-            </button>
-          </div>
+          </ReviewInfo>
+        </ReviewCardBody>
+        <ReviewCardFooter>
           <MoviewReviewComments reviewId={review._id} user={user} />
         </ReviewCardFooter>
       </MovieReviewCardWrapper>

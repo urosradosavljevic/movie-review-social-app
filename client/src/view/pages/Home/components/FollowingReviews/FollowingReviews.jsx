@@ -4,7 +4,7 @@ import { MovieReviews } from "../../../../shared-components/MovieReviews/MovieRe
 import useFollowingReviewsQuery from "./useFollowingReviewsQuery";
 
 export const FollowingReviews = ({ following }) => {
-  const { loading, error, data } = useFollowingReviewsQuery(following);
+  const { loading, data } = useFollowingReviewsQuery(following);
 
   if (loading) return <h3>loading...</h3>;
 
