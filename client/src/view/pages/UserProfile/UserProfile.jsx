@@ -8,6 +8,7 @@ import useUserQuery from "./useUserQuery";
 import { AddMovieReview } from "../../shared-components/AddMovieReview/AddMovieReview";
 import { UserInfo } from "./components/UserInfo/UserInfo";
 import { Users } from "../../shared-components/Users/Users";
+import useAuthUser from "../../../redux/hooks/useAuthUser";
 
 export const UserProfile = ({
   match: {
@@ -15,6 +16,7 @@ export const UserProfile = ({
   },
 }) => {
   const { loading, data } = useUserQuery(slug);
+  const { authUser } = useAuthUser();
 
   if (loading) return <h2>Loading..</h2>;
 
@@ -24,7 +26,7 @@ export const UserProfile = ({
       <MainContentWrapper>
         <UserInfo user={data.user} />
         <div>
-          <AddMovieReview />
+          {authUser._id === data.user._id && <AddMovieReview />}
           <MovieReviews reviewsIds={data.user.reviews} />
         </div>
         <Users />
