@@ -18,4 +18,4 @@
   * JWT
   
 
-![Current Preview](https://raw.githubusercontent.com/urosradosavljevic/movie-review-social-app/master/preview.JPG)
+![Current Preview](https://raw.githubusercontent.com/urosradosavljevic/movie-review-social-app/master/homepage-preview.jpg)
