@@ -15,17 +15,22 @@ export const Users = () => {
         <h3>Loading...</h3>
       ) : (
         <ul>
-          {data.users.map((user) => (
-            <UserCard
-              following={
-                authUser.following.indexOf(user._id) >= 0 ? true : false
-              }
-              key={user._id}
-              authUserId={authUser._id}
-              name={user.name}
-              id={user._id}
-            />
-          ))}
+          {data.users.reduce((result, user) => {
+            if (user._id !== authUser._id) {
+              result.push(
+                <UserCard
+                  following={
+                    authUser.following.indexOf(user._id) >= 0 ? true : false
+                  }
+                  key={user._id}
+                  authUserId={authUser._id}
+                  name={user.name}
+                  id={user._id}
+                />
+              );
+            }
+            return result;
+          }, [])}
         </ul>
       )}
     </div>

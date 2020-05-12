@@ -9,8 +9,6 @@ import useAuthUser from "../../../redux/hooks/useAuthUser";
 import { useEffect } from "react";
 
 export const MovieReviews = ({ reviewsIds }) => {
-  console.log("reviewsIds", reviewsIds);
-
   const { authUser } = useAuthUser();
 
   return (

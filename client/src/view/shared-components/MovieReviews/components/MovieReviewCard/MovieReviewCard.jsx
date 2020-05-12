@@ -17,7 +17,6 @@ import useDeleteReviewMutation from "./useDeleteReviewMutation";
 // styled components
 
 export const MovieReviewCard = ({ id, user }) => {
-  console.log("called");
   const likeReviewMu = useLikeReviewMutation();
   const deleteReviewMutation = useDeleteReviewMutation();
 

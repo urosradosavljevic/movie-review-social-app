@@ -8,11 +8,11 @@ import {
 import { Button } from "../../../Buttons";
 import * as routes from "../../../../../constants/routes";
 
-import useFollowUserMutation from "./useFollowUserMutation";
+import useFollowUserMutation from "../../../../../apollo-hooks/useFollowUserMutation";
 import { Link } from "react-router-dom";
 
 export const UserCard = ({ name, id, authUserId, following }) => {
-  const [followUser, { loading, error, data }] = useFollowUserMutation();
+  const [followUser] = useFollowUserMutation();
 
   return (
     <UserCardWrapper>
@@ -22,7 +22,7 @@ export const UserCard = ({ name, id, authUserId, following }) => {
             src="https://cdn3.iconfinder.com/data/icons/user-interface-web-1/550/web-circle-circular-round_44-512.png"
             alt="movie icon"
           />
-          <UserCredentials> {name}</UserCredentials>
+          <UserCredentials>{name}</UserCredentials>
         </UserWrapper>
       </Link>
       <Button

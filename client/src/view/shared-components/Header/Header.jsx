@@ -25,7 +25,7 @@ export const Header = () => {
           <Link to={routes.HOME}>HOME</Link>
         </li>
         <li>
-          <Link to={routes.USER + authUser.email}>My Reviews</Link>
+          <Link to={routes.USER + authUser.email}>My Profile</Link>
         </li>
         <li>
           <Link to={routes.HOME} onClick={logout}>

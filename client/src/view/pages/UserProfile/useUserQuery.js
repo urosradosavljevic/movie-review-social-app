@@ -9,6 +9,7 @@ export const query = gql`
         _id
       }
       name
+      following
     }
   }
 `;

@@ -11,7 +11,6 @@ export const FollowingReviews = ({ following }) => {
   return (
     <>
       <AddMovieReview />
-      {console.log(data)}
       <MovieReviews reviewsIds={data && data.followingReviews} />
     </>
   );

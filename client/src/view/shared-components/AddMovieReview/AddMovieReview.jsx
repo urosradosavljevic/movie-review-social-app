@@ -75,7 +75,7 @@ export const AddMovieReview = () => {
           <AddReviewHeader>New review</AddReviewHeader>
           <Form onSubmit={submit}>
             <span
-              id="cancel-expand-review"
+              id="cancel-add-review"
               onClick={() => setAddReviewExpand(false)}
             >
               x

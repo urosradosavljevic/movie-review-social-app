@@ -8,4 +8,11 @@ export const AddMovieReviewWrapper = styled.div`
   display: flex;
   flex-direction: column;
   background-color: #fff;
+
+  #cancel-add-review {
+    position: absolute;
+    right: 25px;
+    top: 8px;
+    cursor: pointer;
+  }
 `;
