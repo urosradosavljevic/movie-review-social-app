@@ -6,10 +6,10 @@ import { useHistory } from "react-router-dom";
 import * as routes from "./../../../../../constants/routes";
 import * as actions from "./../../../../../constants/action_types";
 
-import { Form } from "../../../../shared-components/Form";
-import { FormInput } from "../../../../shared-components/FormInput";
-
 import useRegisterMutation from "./useRegisterMutation";
+import { Form } from "../../../../shared-components/Form/Form";
+import { TextInput } from "../../../../shared-components/Form/TextInput/TextInput";
+import { FormInput } from "../../../../shared-components/Form/FormInput";
 
 export const Register = () => {
   const [createUser, { loading, error, data }] = useRegisterMutation();
@@ -64,27 +64,27 @@ export const Register = () => {
 
   return (
     <Form onSubmit={submit}>
-      <FormInput
+      <TextInput
         onChange={handleChange(setEmail)}
         value={email}
-        placeholder="Email address / username"
+        title="Email address / username"
       />
-      <FormInput
+      <TextInput
         onChange={handleChange(setName)}
         value={name}
-        placeholder="Full name"
+        title="Full name"
       />
-      <FormInput
+      <TextInput
         onChange={handleChange(setPassword)}
         value={password}
         type="password"
-        placeholder="Password"
+        title="Password"
       />
-      <FormInput
+      <TextInput
         onChange={handleChange(setConfirm)}
         value={confirm}
         type="password"
-        placeholder="Confirm Password"
+        title="Confirm Password"
       />
       <div>
         <span style={{ color: "red" }}>

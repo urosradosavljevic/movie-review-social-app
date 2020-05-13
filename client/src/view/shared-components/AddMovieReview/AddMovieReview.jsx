@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
 
-import { Form } from "./../Form";
-import { FormInput } from "./../FormInput";
+import { Form } from "../Form/Form";
+import { FormInput } from "../Form/FormInput";
 import { UploadReviewImage } from "./../UploadReviewImage/UploadReviewImage";
 import { AddMovieReviewWrapper } from "./components/AddMovieReviewWrapper";
 import { Button } from "./../Buttons";
+import { AddReviewHeader } from "./components/AddReviewHeader";
+import { TextInput } from "../Form/TextInput/TextInput";
+import { TextField } from "../Form/TextField/TextField";
 
-// apollo
 import useCreateReviewMutation from "./useCreateReviewMutation";
 import { query as reviewsQuery } from "./../../../apollo-queries/reviewsQuery";
 import useAuthUser from "../../../redux/hooks/useAuthUser";
-import { AddReviewHeader } from "./components/AddReviewHeader";
+import { SelectField } from "../Form/SelectField/SelectField";
 
 export const AddMovieReview = () => {
   const [createReview, { loading, error, data }] = useCreateReviewMutation();
@@ -20,11 +22,11 @@ export const AddMovieReview = () => {
   const [title, setTitle] = useState("");
   const [review, setReview] = useState("");
   const [director, setDirector] = useState("");
-  const [rate, setRate] = useState("");
+  const [rate, setRate] = useState(5);
   const [reviewImagePath, setReviewImagePath] = useState(null);
 
   const [addReviewError, setAddReviewError] = useState(null);
-  const [addReviewExpand, setAddReviewExpand] = useState(false);
+  const [addReviewExpand, setAddReviewExpand] = useState(true);
 
   useEffect(() => {
     error !== addReviewError && setAddReviewError(error);
@@ -75,30 +77,36 @@ export const AddMovieReview = () => {
           <AddReviewHeader>New review</AddReviewHeader>
           <Form onSubmit={submit}>
             <span
-              id="cancel-add-review"
+              id="cancel-expand-review"
               onClick={() => setAddReviewExpand(false)}
             >
               x
             </span>
-            <FormInput
+            <TextInput
+              title="Movie Title"
+              name="title"
               onChange={handleChange(setTitle)}
               value={title}
-              placeholder="Movie Title"
             />
-            <FormInput
-              onChange={handleChange(setReview)}
-              value={review}
-              placeholder="Movie Review"
-            />
-            <FormInput
+            <TextInput
+              title="Director"
+              name="director"
               onChange={handleChange(setDirector)}
               value={director}
-              placeholder="Director"
             />
-            <FormInput
+            <TextField
+              title="Movie Review"
+              name="review"
+              onChange={handleChange(setReview)}
+              value={review}
+              rows={4}
+            />
+            <SelectField
+              options={[1, 2, 3, 4, 5]}
+              title="Rating"
+              name="rating"
               onChange={handleChange(setRate)}
               value={rate}
-              placeholder="Rating"
             />
             <div>
               <span style={{ color: "red" }}>
@@ -109,11 +117,13 @@ export const AddMovieReview = () => {
               reviewImagePath={reviewImagePath}
               setReviewImagePath={setReviewImagePath}
             />
-            <FormInput
-              type="submit"
-              value={loading ? "Adding.." : "Add review"}
-              submit
-            />
+            <div>
+              <FormInput
+                type="submit"
+                value={loading ? "Adding.." : "Add review"}
+                submit
+              />
+            </div>
           </Form>
         </>
       ) : (

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import useEditUserInfoMutation from "./useEditUserInfoMutation";
-import { Form } from "../../../../shared-components/Form";
-import { FormInput } from "../../../../shared-components/FormInput";
+import { Form } from "../../../../shared-components/Form/Form";
+import { FormInput } from "../../../../shared-components/Form/FormInput";
 
 export const UserName = ({ userId, name, editFlag, setEditFlag }) => {
   const [editUser] = useEditUserInfoMutation();
@@ -10,7 +10,6 @@ export const UserName = ({ userId, name, editFlag, setEditFlag }) => {
 
   const setNameSubmit = (e) => {
     e.preventDefault();
-    console.log("userName", userName);
     editUser({ variables: { userId, name: userName } });
   };
 

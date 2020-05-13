@@ -1,14 +1,17 @@
 import styled, { css } from "styled-components";
 
 export const FormInput = styled.input`
-  padding: 8px 15px;
-  margin: 0 20px 15px;
+  padding: 8px 10px;
+  margin: 5px 0 15px 0;
   display: inline-block;
-  border: none;
-  border-bottom: 1px solid #000;
+  border: 1px solid #333;
+  border-radius: 3px;
   outline: none;
-  border-radius: 0.1rem;
   font-size: 0.8rem;
+
+  &:focus {
+    background-color: rgba(0, 0, 0, 0.02);
+  }
 
   ${(props) =>
     props.submit &&

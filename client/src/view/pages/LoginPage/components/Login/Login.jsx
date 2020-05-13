@@ -6,10 +6,11 @@ import * as routes from "./../../../../../constants/routes";
 
 // apollo
 import useLoginQuery from "./useLoginQuery";
+import { Form } from "../../../../shared-components/Form/Form";
+import { FormInput } from "../../../../shared-components/Form/FormInput";
+import { TextInput } from "../../../../shared-components/Form/TextInput/TextInput";
 
 // components
-import { Form } from "./../../../../shared-components/Form";
-import { FormInput } from "./../../../../shared-components/FormInput";
 
 export const Login = () => {
   const [login, { loading, error, data }] = useLoginQuery();
@@ -60,16 +61,16 @@ export const Login = () => {
 
   return (
     <Form onSubmit={submit}>
-      <FormInput
+      <TextInput
         value={email}
         onChange={handleChange(setEmail)}
-        placeholder="Email address"
+        title="Email address"
       />
-      <FormInput
+      <TextInput
         value={password}
         onChange={handleChange(setPassword)}
         type="password"
-        placeholder="Password"
+        title="Password"
       />
       {loginError && <span style={{ color: "red" }}>{loginError.message}</span>}
       <FormInput

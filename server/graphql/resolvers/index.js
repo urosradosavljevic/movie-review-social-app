@@ -206,7 +206,7 @@ export default {
         const { userId, name } = args;
         const user = await User.findById(userId);
         user.name = name;
-        console.log("user", user);
+
         user.save();
         return user;
       } catch (err) {

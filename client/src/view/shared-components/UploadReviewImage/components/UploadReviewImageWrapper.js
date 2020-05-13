@@ -15,7 +15,7 @@ export const UploadReviewImageWrapper = styled.div`
   background-position: center;
 
   padding: 0 10px;
-  margin: 0 15px 0 15px;
+  margin: 0;
   cursor: pointer;
   p {
     position: absolute;

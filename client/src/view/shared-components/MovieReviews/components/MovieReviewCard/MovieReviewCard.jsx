@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import * as routes from "../../../../../constants/routes";
+import { renderRate } from "../../../../../helpers";
 
 import {
   MovieReviewCardWrapper,
@@ -37,12 +38,6 @@ export const MovieReviewCard = ({ id, user }) => {
 
   const deleteReview = (id) => {
     deleteReviewMutation(id);
-  };
-
-  const renderRate = (times) => {
-    let rate = "";
-    while (times--) rate = `${rate} ⭐`;
-    return rate;
   };
 
   useEffect(() => {
