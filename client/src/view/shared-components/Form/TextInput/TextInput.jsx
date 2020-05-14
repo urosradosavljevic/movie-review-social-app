@@ -1,18 +1,17 @@
 import React from "react";
+import { getIn } from "formik";
 import { FormInput } from "../FormInput";
 import { Label } from "../Label";
+import { InputError } from "../InputError";
 
-export const TextInput = ({ title, name, onChange, value, ...props }) => {
+export const TextInput = ({ comment, title, name, field, form, ...props }) => {
+  const errorText =
+    getIn(form.touched, form.fieldname) && getIn(form.errors, field.name);
   return (
     <div>
-      <Label htmlFor={name}>{title}</Label>
-      <FormInput
-        text
-        name={name}
-        onChange={onChange}
-        value={value}
-        {...props}
-      />
+      {!comment && <Label htmlFor={name}>{title}</Label>}
+      <FormInput text {...props} {...field} />
+      {!comment && <InputError>{errorText && errorText}</InputError>}
     </div>
   );
 };

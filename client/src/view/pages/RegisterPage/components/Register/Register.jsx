@@ -6,31 +6,22 @@ import { useHistory } from "react-router-dom";
 import * as routes from "./../../../../../constants/routes";
 import * as actions from "./../../../../../constants/action_types";
 
+import { Formik, Form, Field } from "formik";
+import { registerValidationSchema } from "../../../../../constants/validationSchema";
 import useRegisterMutation from "./useRegisterMutation";
-import { Form } from "../../../../shared-components/Form/Form";
+import { FormWrapper } from "../../../../shared-components/Form/FormWrapper";
 import { TextInput } from "../../../../shared-components/Form/TextInput/TextInput";
 import { FormInput } from "../../../../shared-components/Form/FormInput";
 
 export const Register = () => {
   const [createUser, { loading, error, data }] = useRegisterMutation();
 
-  const [registerError, setRegisterError] = useState(null);
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirm, setConfirm] = useState("");
-  const [name, setName] = useState("");
-
   const history = useHistory();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    error !== registerError && setRegisterError(error);
-  }, [error]);
-
-  useEffect(() => {
     const func = async () => {
-      const { _id, token, following } = await data.createUser;
+      const { _id, email, token, following } = await data.createUser;
 
       dispatch({
         type: actions.SET_AUTH_USER,
@@ -48,54 +39,56 @@ export const Register = () => {
     data !== undefined && func();
   }, [data]);
 
-  const handleChange = (setter) => (e) => {
-    setter(e.target.value);
-  };
-
-  const submit = async (e) => {
-    e.preventDefault();
-
-    if (email !== "" && password !== "" && confirm !== "" && name !== "") {
-      createUser({ variables: { email, password, confirm, name } });
-    } else {
-      setRegisterError({ message: "All fields are required" });
-    }
+  const submit = async (values, { setSubmitting }) => {
+    await createUser({ variables: values });
+    setSubmitting(false);
   };
 
   return (
-    <Form onSubmit={submit}>
-      <TextInput
-        onChange={handleChange(setEmail)}
-        value={email}
-        title="Email address / username"
-      />
-      <TextInput
-        onChange={handleChange(setName)}
-        value={name}
-        title="Full name"
-      />
-      <TextInput
-        onChange={handleChange(setPassword)}
-        value={password}
-        type="password"
-        title="Password"
-      />
-      <TextInput
-        onChange={handleChange(setConfirm)}
-        value={confirm}
-        type="password"
-        title="Confirm Password"
-      />
-      <div>
-        <span style={{ color: "red" }}>
-          {(registerError && registerError.message) || ""}
-        </span>
-      </div>
-      <FormInput
-        type="submit"
-        value={loading ? "Verifying" : "Register"}
-        submit
-      />
-    </Form>
+    <FormWrapper>
+      <Formik
+        validationSchema={registerValidationSchema}
+        initialValues={{
+          email: "",
+          name: "",
+          password: "",
+          confirm: "",
+        }}
+        onSubmit={submit}
+      >
+        {({ isSubmitting }) => (
+          <Form>
+            <Field
+              name="email"
+              title="Email address / username"
+              component={TextInput}
+            />
+            <Field name="name" title="Full name" component={TextInput} />
+            <Field
+              name="password"
+              type="password"
+              title="Password"
+              component={TextInput}
+            />
+            <Field
+              name="confirm"
+              type="password"
+              title="Confirm Password"
+              component={TextInput}
+            />
+            <div>
+              <span style={{ color: "red" }}>
+                {(error && error.message) || ""}
+              </span>
+            </div>
+            <FormInput
+              type="submit"
+              value={isSubmitting ? "Verifying..." : "Register"}
+              submit
+            />
+          </Form>
+        )}
+      </Formik>
+    </FormWrapper>
   );
 };

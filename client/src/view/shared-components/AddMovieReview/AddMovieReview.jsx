@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 
-import { Form } from "../Form/Form";
+import { FormWrapper } from "../Form/FormWrapper";
+import { Formik, Form, Field } from "formik";
+import {movieReviewValidationSchema} from "../../../constants/validationSchema";
+
 import { FormInput } from "../Form/FormInput";
 import { UploadReviewImage } from "./../UploadReviewImage/UploadReviewImage";
 import { AddMovieReviewWrapper } from "./components/AddMovieReviewWrapper";
@@ -26,7 +29,7 @@ export const AddMovieReview = () => {
   const [reviewImagePath, setReviewImagePath] = useState(null);
 
   const [addReviewError, setAddReviewError] = useState(null);
-  const [addReviewExpand, setAddReviewExpand] = useState(true);
+  const [addReviewExpand, setAddReviewExpand] = useState(false);
 
   useEffect(() => {
     error !== addReviewError && setAddReviewError(error);
@@ -75,56 +78,76 @@ export const AddMovieReview = () => {
       {addReviewExpand ? (
         <>
           <AddReviewHeader>New review</AddReviewHeader>
-          <Form onSubmit={submit}>
-            <span
-              id="cancel-expand-review"
-              onClick={() => setAddReviewExpand(false)}
+          <FormWrapper>
+            <Formik
+              validationSchema={movieReviewValidationSchema}
+              initialValues={{
+                title: "",
+                review: "",
+                director: "",
+                rate: 5,
+                reviewImagePath: "",
+              }}
+              onSubmit={submit}
             >
-              x
-            </span>
-            <TextInput
-              title="Movie Title"
-              name="title"
-              onChange={handleChange(setTitle)}
-              value={title}
-            />
-            <TextInput
-              title="Director"
-              name="director"
-              onChange={handleChange(setDirector)}
-              value={director}
-            />
-            <TextField
-              title="Movie Review"
-              name="review"
-              onChange={handleChange(setReview)}
-              value={review}
-              rows={4}
-            />
-            <SelectField
-              options={[1, 2, 3, 4, 5]}
-              title="Rating"
-              name="rating"
-              onChange={handleChange(setRate)}
-              value={rate}
-            />
-            <div>
-              <span style={{ color: "red" }}>
-                {addReviewError ? addReviewError.message : ""}
-              </span>
-            </div>
-            <UploadReviewImage
-              reviewImagePath={reviewImagePath}
-              setReviewImagePath={setReviewImagePath}
-            />
-            <div>
-              <FormInput
-                type="submit"
-                value={loading ? "Adding.." : "Add review"}
-                submit
-              />
-            </div>
-          </Form>
+              {() => (
+                <Form>
+                  <span
+                    id="cancel-expand-review"
+                    onClick={() => setAddReviewExpand(false)}
+                  >
+                    x
+                  </span>
+                  <Field
+                    title="Movie Title"
+                    name="title"
+                    onChange={handleChange(setTitle)}
+                    value={title}
+                    component={TextInput}
+                  />
+                  <Field
+                    title="Director"
+                    name="director"
+                    onChange={handleChange(setDirector)}
+                    value={director}
+                    component={TextInput}
+                  />
+                  <Field
+                    title="Movie Review"
+                    name="review"
+                    onChange={handleChange(setReview)}
+                    value={review}
+                    rows={4}
+                    component={TextField}
+                  />
+                  <Field
+                    options={[1, 2, 3, 4, 5]}
+                    title="Rating"
+                    name="rating"
+                    onChange={handleChange(setRate)}
+                    value={rate}
+                    component={SelectField}
+                  />
+                  <div>
+                    <span style={{ color: "red" }}>
+                      {addReviewError ? addReviewError.message : ""}
+                    </span>
+                  </div>
+                  <UploadReviewImage
+                    reviewImagePath={reviewImagePath}
+                    setReviewImagePath={setReviewImagePath}
+                  />
+                  <div>
+                    <FormInput
+                      type="submit"
+                      value={loading ? "Adding.." : "Add review"}
+                      submit
+                    />
+                  </div>
+                </Form>
+              )}
+            </Formik>
+          </FormWrapper>
         </>
       ) : (
         <Button addReview onClick={() => setAddReviewExpand(true)}>

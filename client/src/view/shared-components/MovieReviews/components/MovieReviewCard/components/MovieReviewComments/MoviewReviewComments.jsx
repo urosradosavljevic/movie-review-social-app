@@ -2,16 +2,17 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import * as routes from "../../../../../../../constants/routes";
 import moment from "moment";
+import { Formik, Form, Field } from "formik";
 
 import useCommentReviewMutation from "./useCommentReviewMutation";
 import { ReviewCommentsWrapper } from "./ReviewCommentsWrapper";
 import useDeleteCommentReview from "./useDeleteCommentReview";
 import useReviewCommentsQuery from "./useReviewCommentsQuery";
+import { TextInput } from "../../../../../Form/TextInput/TextInput";
 
 export const MoviewReviewComments = ({ reviewId, user }) => {
   const [displayMore, setDisplayMore] = useState(true);
   const [moreFlag, setMoreFlag] = useState(false);
-  const [comment, setComment] = useState("");
   const { loading, error, data: reviewComments } = useReviewCommentsQuery(
     reviewId
   );
@@ -22,10 +23,10 @@ export const MoviewReviewComments = ({ reviewId, user }) => {
     deleteCommentReviewMutation(id, reviewId);
   };
 
-  const commentReview = (e) => {
-    e.preventDefault();
-    commentReviewMutation(reviewId, user, comment);
-    setComment("");
+  const commentReview = async (values, { setSubmitting }) => {
+    await commentReviewMutation(reviewId, user, values.comment);
+    values.comment = "";
+    setSubmitting(false);
   };
 
   useEffect(() => {
@@ -78,15 +79,19 @@ export const MoviewReviewComments = ({ reviewId, user }) => {
           {moreFlag && (displayMore ? "Show more.." : "Show less..")}
         </span>
       </div>
-      <form onSubmit={commentReview}>
-        <input
-          type="text"
-          className="comment-input"
-          placeholder="Place comment.."
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-        />
-      </form>
+      <Formik initialValues={{ comment: "" }} onSubmit={commentReview}>
+        {() => (
+          <Form>
+            <Field
+              name="comment"
+              className="comment-input"
+              placeholder="Place comment.."
+              comment
+              component={TextInput}
+            />
+          </Form>
+        )}
+      </Formik>
     </ReviewCommentsWrapper>
   );
 };

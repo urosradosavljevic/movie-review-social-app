@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import useEditUserInfoMutation from "./useEditUserInfoMutation";
-import { Form } from "../../../../shared-components/Form/Form";
+import { FormWrapper } from "../../../../shared-components/Form/FormWrapper";
 import { FormInput } from "../../../../shared-components/Form/FormInput";
 
 export const UserName = ({ userId, name, editFlag, setEditFlag }) => {
@@ -19,15 +19,17 @@ export const UserName = ({ userId, name, editFlag, setEditFlag }) => {
 
   return (
     <div>
-      <Form style={{ display: !editFlag && "none" }} onSubmit={setNameSubmit}>
-        <FormInput
-          ref={inputElement}
-          edit
-          size={13}
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
-        />
-      </Form>
+      <FormWrapper style={{ display: !editFlag && "none" }}>
+        <form onSubmit={setNameSubmit}>
+          <FormInput
+            ref={inputElement}
+            edit
+            size={13}
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
+          />
+        </form>
+      </FormWrapper>
       <h2
         style={{ display: editFlag && "none" }}
         onDoubleClick={() => setEditFlag(!editFlag)}
