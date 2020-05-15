@@ -1,22 +1,22 @@
 # Movie Review Social App
- *Project is still in progress, feel free to leave any feedback*
 
-* **Finished so far:**
+* **Focus:**
   * Authentification with JWT
-  * Posting movie reviews with photo upload on server
-  * Likes, comments and follows with live updates
+  * Apollo mutation with file upload
+  * Apollo cache
   * User profile page
   * Explore page, Following page
   * 
 * **Technologies used:** 
   * ReactJS
-  * styled-components
-  * Apollo Client & Server
   * Redux
-  * MongoDB
+  * Formik
+  * react-dropzone
+  * styled-components
+  * apollo-server-express
   * Mongoose
   * JWT
+  * MongoDB
   
 
-![Current Homepage Preview](https://raw.githubusercontent.com/urosradosavljevic/movie-review-social-app/master/homepage-preview.jpg)
-![Current UserPage Preview](https://raw.githubusercontent.com/urosradosavljevic/movie-review-social-app/master/userpage-preview.jpg)
+![App Preview](https://raw.githubusercontent.com/urosradosavljevic/movie-review-social-app/master/app-preview.jpeg)
