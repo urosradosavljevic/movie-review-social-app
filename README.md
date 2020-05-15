@@ -6,7 +6,6 @@
   * Apollo cache
   * User profile page
   * Explore page, Following page
-  * 
 * **Technologies used:** 
   * ReactJS
   * Redux
