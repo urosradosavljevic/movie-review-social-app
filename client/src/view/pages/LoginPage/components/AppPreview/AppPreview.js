@@ -1,7 +1,17 @@
 import styled from "styled-components";
+import breakpoint from "styled-components-breakpoint";
 
 export const AppPreview = styled.section`
-  width: 100px;
-  height: 100px;
-  margin: auto;
+  display: none;
+
+  ${breakpoint("desktop")`
+    display: block;
+    height: 80vh;
+    margin: auto;
+    
+      img {
+        height:100%;
+        width: auto;
+      }
+  `}
 `;

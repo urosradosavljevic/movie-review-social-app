@@ -28,7 +28,7 @@ export const Header = () => {
       </MenuIcon>
       <HeaderNav className={navExpanded ? "expanded" : null}>
         <li>
-          <Link to={routes.HOME}>HOME</Link>
+          <Link to={routes.HOME}>Home</Link>
         </li>
         <li>
           <Link to={routes.USER + authUser.email}>My Profile</Link>

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import appPreview from "./app-preview.png";
 
 import { Login } from "./components/Login/Login";
 import { LogoHeading } from "../../shared-components/LogoHeading";
@@ -13,7 +14,9 @@ import * as routes from "./../../../constants/routes";
 export const LoginPage = () => {
   return (
     <LoginPageWrapper>
-      <AppPreview>App Preview</AppPreview>
+      <AppPreview>
+        <img src={appPreview} alt="app preview" />
+      </AppPreview>
       <LoginFormWrapper>
         <Section>
           <LogoHeading>SocialMap</LogoHeading>
