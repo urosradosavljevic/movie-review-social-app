@@ -8,9 +8,12 @@ import { HomeWrapper } from "./components/HomeWrapper";
 import { Users } from "../../shared-components/Users/Users";
 import { ExploreReviews } from "./components/ExploreReviews/ExploreReviews";
 import { FollowingReviews } from "./components/FollowingReviews/FollowingReviews";
+import { BottomNav } from "./components/BottomNav/BottomNav";
+import { Footer } from "../../shared-components/Footer";
 
 export const AuthHome = ({ authUser: { following } }) => {
   const [exploreFlag, setExploreFlag] = useState(false);
+  const [usersExpand, setUsersExpand] = useState(false);
   return (
     <HomeWrapper>
       <Header />
@@ -23,9 +26,19 @@ export const AuthHome = ({ authUser: { following } }) => {
             <FollowingReviews following={following} />
           )}
         </section>
-        <Users />
+        <Users usersExpand={usersExpand} />
+        <BottomNav
+          exploreFlag={exploreFlag}
+          setExploreFlag={setExploreFlag}
+          usersExpand={usersExpand}
+          setUsersExpand={setUsersExpand}
+        />
       </MainContentWrapper>
-      <footer>Uros Radosavljevic 2020</footer>
+      <Footer>
+        <a href={"https://github.com/urosradosavljevic"}>
+          Uros Radosavljevic 2020
+        </a>
+      </Footer>
     </HomeWrapper>
   );
 };

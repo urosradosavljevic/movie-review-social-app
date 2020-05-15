@@ -32,7 +32,15 @@ export const ReviewCommentsWrapper = styled.div`
   }
   .comment-user {
     padding-right: 4px;
-    color: blue;
+
+    a {
+      font-weight: 550;
+      color: darkblue;
+      text-decoration: none;
+    }
+    a:visited {
+      color: darkblue;
+    }
   }
 
   .comment-time {

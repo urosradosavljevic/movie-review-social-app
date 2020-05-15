@@ -3,14 +3,15 @@ import useUsersQuery from "./useUsersQuery";
 import { UserCard } from "./components/UserCard/UserCard";
 import useAuthUser from "../../../redux/hooks/useAuthUser";
 import { List } from "../List";
+import { UsersWrapper } from "./components/UsersWrapper";
 
-export const Users = () => {
+export const Users = ({ usersExpand }) => {
   const { loading, data } = useUsersQuery();
 
   const { authUser } = useAuthUser();
 
   return (
-    <div>
+    <UsersWrapper className={usersExpand ? "expanded" : null}>
       <h3 style={{ textAlign: "center" }}>Users</h3>
       {loading ? (
         <h4>Loading...</h4>
@@ -26,6 +27,7 @@ export const Users = () => {
                   key={user._id}
                   authUserId={authUser._id}
                   name={user.name}
+                  email={user.email}
                   id={user._id}
                 />
               );
@@ -34,6 +36,6 @@ export const Users = () => {
           }, [])}
         </List>
       )}
-    </div>
+    </UsersWrapper>
   );
 };

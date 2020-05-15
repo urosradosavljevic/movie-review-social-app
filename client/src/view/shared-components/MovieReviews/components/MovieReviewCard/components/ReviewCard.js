@@ -42,6 +42,15 @@ export const ReviewCardAuthor = styled.span`
   margin: 0;
   margin-top: 10px;
   font-size: 14px;
+
+  a {
+    font-weight: 550;
+    color: darkblue;
+    text-decoration: none;
+  }
+  a:visited {
+    color: darkblue;
+  }
 `;
 
 export const ReviewCardBody = styled.section`
@@ -60,6 +69,7 @@ export const ReviewInfo = styled.section`
     bottom: 0;
     display: inline-flex;
     align-items: center;
+    background-color: white;
   }
 `;
 

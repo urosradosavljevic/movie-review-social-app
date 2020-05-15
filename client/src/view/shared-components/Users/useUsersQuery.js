@@ -5,6 +5,7 @@ export const query = gql`
   query {
     users {
       _id
+      email
       name
       following
     }

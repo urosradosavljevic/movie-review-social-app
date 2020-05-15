@@ -11,12 +11,12 @@ import * as routes from "../../../../../constants/routes";
 import useFollowUserMutation from "../../../../../apollo-hooks/useFollowUserMutation";
 import { Link } from "react-router-dom";
 
-export const UserCard = ({ name, id, authUserId, following }) => {
+export const UserCard = ({ email, name, id, authUserId, following }) => {
   const [followUser] = useFollowUserMutation();
 
   return (
     <UserCardWrapper>
-      <Link to={routes.USER + name}>
+      <Link to={routes.USER + email}>
         <UserWrapper>
           <UserIcon
             src="https://cdn3.iconfinder.com/data/icons/user-interface-web-1/550/web-circle-circular-round_44-512.png"

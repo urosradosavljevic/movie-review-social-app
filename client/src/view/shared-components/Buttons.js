@@ -33,5 +33,10 @@ export const Button = styled.button`
       text-align: left;
       font-size: 14px;
       outline: none;
+      margin-left: 5px;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.07);
+      }
     `}
 `;

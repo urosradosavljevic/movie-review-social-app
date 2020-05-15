@@ -1,15 +1,20 @@
 import styled from "styled-components";
+import breakpoint from "styled-components-breakpoint";
 
 export const HeaderNav = styled.ul`
-  display: inline-block;
+  display: none;
+  background-color: #333;
   list-style-type: none;
   margin: 0;
-  margin-left: auto;
+  margin-top: 3rem;
   padding: 0;
-  background-color: #333;
+  width: 100%;
+  height: 100vh;
+  z-index: 1000;
+  font-size: 1.4rem;
 
   li {
-    float: left;
+    float: none;
   }
 
   li a {
@@ -23,4 +28,21 @@ export const HeaderNav = styled.ul`
   li a:hover {
     background-color: #111;
   }
+
+  &.expanded {
+    display: block;
+  }
+
+  ${breakpoint("desktop")`  
+    display: inline-block;
+    height: auto;
+    width:auto;
+    margin: 0;
+    margin-left: auto;
+    font-size: 1rem;
+  
+    li{
+      float: left;     
+     }
+  `}
 `;

@@ -16,8 +16,10 @@ export const SelectField = ({
       <Label htmlFor={name}>{title}</Label>
       <Select name={name} onChange={onChange} value={value} {...props}>
         {options &&
-          options.map((option) => (
-            <option value={option}>{renderRate(option)}</option>
+          options.map((option, index) => (
+            <option key={index} value={option}>
+              {renderRate(option)}
+            </option>
           ))}
       </Select>
     </div>
