@@ -2,10 +2,8 @@
 
 * **Focus:**
   * Authentification with JWT
-  * Apollo mutation with file upload
-  * Apollo cache
-  * User profile page
-  * Explore page, Following page
+  * Apollo with file upload
+  
 * **Technologies used:** 
   * ReactJS
   * Redux
